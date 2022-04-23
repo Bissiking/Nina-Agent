@@ -45,7 +45,6 @@ app.get('/list2', (req, res, next) => {
     // List
     docker.container.list()
         // Inspect
-        .then(containers => containers[1].status())
         .then(container => container.stats())
         .then(stats => {
             stats.on('data', stat => console.log('Stats: ', stat.toString()))
