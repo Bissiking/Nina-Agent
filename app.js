@@ -21,4 +21,19 @@ app.get('/start', (req, res, next) => {
     exec('start start.bat')
 });
 
+app.get('/list', (req, res, next) => {
+    'use strict';
+    const { Docker } = require('node-docker-api');
+
+    const docker = new Docker({ socketPath: '/var/run/docker.sock' });
+
+    // List
+    docker.container.list()
+        // Inspect
+        .then(containers => containers[0].status())
+        .then(container => container.top())
+        .then(processes => console.log(processes))
+        .catch(error => console.log(error));
+});
+
 module.exports = app;
