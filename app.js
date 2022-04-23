@@ -36,4 +36,25 @@ app.get('/list', (req, res, next) => {
         .catch(error => console.log(error));
 });
 
+app.get('/list2', (req, res, next) => {
+    'use strict';
+    const { Docker } = require('node-docker-api');
+
+    const docker = new Docker({ socketPath: '/var/run/docker.sock' });
+
+    // List
+    docker.container.list()
+        // Inspect
+        .then(containers => containers[0].status())
+        .then(container => container.stats())
+        .then(stats => {
+            stats.on('data', stat => console.log('Stats: ', stat.toString()))
+            stats.on('error', err => console.log('Error: ', err))
+        })
+        .catch(error => console.log(error));
+});
+
+
+
+
 module.exports = app;
