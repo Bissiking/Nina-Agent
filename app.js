@@ -1,9 +1,10 @@
 const express = require('express');
 require('dotenv').config();
 const app = express();
-
+// Docker
+var Docker = require('dockerode');
+var docker = new Docker({socketPath: '/var/run/docker.sock'});
 // Variables
-var logo = "/public/images/logos/"
 
 
 app.use(express.json());
@@ -15,45 +16,58 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get('/start', (req, res, next) => {
-    const { exec } = require('child_process');
-    console.log('Starting MC server');
-    exec('start start.bat')
+app.get('/', (req, res, next) => {
+    console.log('Valide')
+    res.status(201).json({
+        msg: 'test ok'
+    })
 });
 
-app.get('/list', (req, res, next) => {
-    'use strict';
-    const { Docker } = require('node-docker-api');
-
-    const docker = new Docker({ socketPath: '/var/run/docker.sock' });
-
-    // List
-    docker.container.list()
-        // Inspect
-        .then(containers => containers[0].status())
-        .then(container => container.top())
-        .then(processes => console.log(processes))
-        .catch(error => console.log(error));
+app.post('/containers', (req, res, next) => {
+    let containerName = req.body.name
+    let commande = req.body.command
+    const opts = {
+        filters: {
+            name: [containerName]
+        },
+       all: true
+       }
+    docker.listContainers(opts, function (err, containers) {
+        // Conversion de la variable en string
+        let ContainerString = containers.toString();
+        // Checkup de la variable
+        if(ContainerString == ""){
+            containers = null;
+        }
+        // Verification de la variable. Si null erreur
+        if (containers !== null) {
+            containers.forEach(function (containerInfo, next) {
+                var container = docker.getContainer(containerInfo.Id);
+               switch (commande) {
+                   case 'start':
+                       if(containerInfo.State === "running"){
+                           return res.status(500).send("Le container est déjà allumé");
+                       }else{
+                           container.start(next);
+                           return res.status(200).send("Démarrage du container");
+                       }                
+                       case 'stop':
+                           if(containerInfo.State === "exited"){
+                               return res.status(500).send("Le container est déjà arrêté");
+                           }else{
+                               container.stop(next);
+                               return res.status(200).send("Arrêt du container - 1 Minutes environ");
+                           }  
+       
+                   default:
+                       return res.status(500).send("Commande introuvable");
+               }
+            });
+        }else{
+            console.log('ERROR 01')
+            return res.status(500).send("Le container n'existe pas !")
+        }
+    });
 });
-
-app.get('/list2', (req, res, next) => {
-    'use strict';
-    const { Docker } = require('node-docker-api');
-
-    const docker = new Docker({ socketPath: '/var/run/docker.sock' });
-
-    // List
-    docker.container.list()
-        // Inspect
-        .then(container => container.stats())
-        .then(stats => {
-            stats.on('data', stat => console.log('Stats: ', stat.toString()))
-            stats.on('error', err => console.log('Error: ', err))
-        })
-        .catch(error => console.log(error));
-});
-
-
-
 
 module.exports = app;
