@@ -56,8 +56,16 @@ app.post('/containers', (req, res, next) => {
                                return res.status(500).send("Le container est déjà arrêté");
                            }else{
                                container.stop(next);
-                               return res.status(200).send("Arrêt du container - 1 Minutes environ");
-                           }  
+                               return res.status(200).send("Arrêt du container - 1 Minute environ");
+                           } 
+
+                           case 'restart':
+                                if(containerInfo.State === "exited"){
+                                    return res.status(500).send("Le container est déjà arrêté");
+                                }else{
+                                    container.restart(next);
+                                    return res.status(200).send("Redémarrage du container - 1 Minute environ");
+                                }
        
                    default:
                        return res.status(500).send("Commande introuvable");
