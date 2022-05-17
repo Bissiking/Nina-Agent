@@ -1,0 +1,276 @@
+body {
+  min-height: 97vh;
+  margin: 0px;
+  background-color: #30475E;
+  font-family: "Open Sans", sans-serif;
+  color: #F5F5F5;
+  font-size: 18px;
+}
+body header {
+  width: 100%;
+  height: 7%;
+  background-color: #f05454;
+}
+body .content-block {
+  width: 100%;
+  height: 93vh;
+  display: flex;
+}
+body .content-block .menu {
+  width: 80px;
+  height: 100%;
+  background-color: rgba(6, 44, 48, 0.37);
+}
+body .content-block .main {
+  width: 100%;
+  margin: 20px 10px;
+}
+body .content-block .main .top-line {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+}
+body .content-block .main .top-line .card-block {
+  width: 350px;
+  height: 200px;
+  background-color: #F5F5F5;
+  border-radius: 5px;
+  margin: 0px 10px;
+  display: flex;
+  flex-direction: column;
+}
+body .content-block .main .top-line .card-block .card-line-one {
+  border-radius: 5px 5px 0px 0px;
+  width: 100%;
+  height: 40%;
+  background-color: #289bfa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+body .content-block .main .top-line .card-block .card-line-two {
+  width: 100%;
+  height: 60%;
+  display: flex;
+  color: #000000;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+body .content-block .main .top-line .card-block .card-line-two .col {
+  width: 50%;
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+body .content-block .main .top-line .card-block .card-line-two .col h4 {
+  width: 100%;
+  text-align: center;
+  margin: 0px 0px 10px 0px;
+}
+body .content-block .main .top-line .card-block .card-line-two .col p {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 35px;
+  margin: 0px;
+}
+body .content-block .main .top-line .card-block .card-line-two .col p span {
+  font-weight: bold;
+}
+body .content-block .main .top-line .card-block .card-line-two .col p span.slash {
+  font-weight: normal;
+}
+body .content-block .main .top-line .card-block .card-line-two .col p span.on {
+  font-weight: normal;
+  color: rgba(29, 211, 59, 0.877);
+}
+body .content-block .main .top-line .card-block .card-line-two hr {
+  width: 0px;
+  height: 60%;
+  border: solid 1px #E2D784;
+}
+body .content-block .main .Block_Nina {
+  width: 100%;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+body .content-block .main .Block_Nina .block {
+  width: 700px;
+  min-height: 120px;
+  background-color: #F5F5F5;
+  border-radius: 5px;
+}
+body .content-block .main .Block_Nina .block .title {
+  width: 100%;
+  background-color: #289bfa;
+  border-radius: 5px 5px 0px 0px;
+  margin: 0px;
+}
+body .content-block .main .Block_Nina .block .title h4 {
+  border-radius: 5px 5px 0px 0px;
+  margin: 0px;
+  padding: 10px 20px;
+}
+body .content-block .activity_recent {
+  width: 350px;
+  height: 100%;
+  background-color: rgba(6, 44, 48, 0.37);
+}
+body .content-block .activity_recent h4 {
+  text-align: center;
+}
+body .dashboard {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-direction: column;
+}
+body .dashboard .blockGEN {
+  width: 100%;
+  height: 30%;
+}
+body .dashboard .blockGEN .card-block {
+  width: 350px;
+  height: 200px;
+  background-color: #F5F5F5;
+  border-radius: 5px;
+  margin: 0px 10px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+body .dashboard .blockGEN .card-block .card-line-one {
+  border-radius: 5px 5px 0px 0px;
+  width: 100%;
+  height: 40%;
+  background-color: #289bfa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+body .dashboard .blockGEN .card-block .card-line-two {
+  width: 100%;
+  height: 60%;
+  display: flex;
+  color: #000000;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+body .dashboard .blockGEN .card-block .card-line-two .col {
+  width: 50%;
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+body .dashboard .blockGEN .card-block .card-line-two .col h4 {
+  width: 100%;
+  text-align: center;
+  margin: 0px 0px 10px 0px;
+}
+body .dashboard .blockGEN .card-block .card-line-two .col p {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 35px;
+  margin: 0px;
+}
+body .dashboard .blockGEN .card-block .card-line-two .col p span {
+  font-weight: bold;
+}
+body .dashboard .blockGEN .card-block .card-line-two .col p span.warning {
+  font-weight: normal;
+  color: rgba(235, 187, 30, 0.877);
+}
+body .dashboard .blockGEN .card-block .card-line-two .col p span.on {
+  font-weight: normal;
+  color: rgba(29, 211, 59, 0.877);
+}
+body .dashboard .blockGEN .card-block .card-line-two .col p span.off {
+  font-weight: normal;
+  color: #a02222;
+}
+body .dashboard .blockGEN .card-block .card-line-two hr {
+  width: 0px;
+  height: 60%;
+  border: solid 1px #E2D784;
+}
+body .dashboard .blockTop {
+  display: flex;
+  justify-content: space-evenly;
+}
+body .dashboard .blockMiddle {
+  display: flex;
+  justify-content: space-evenly;
+}
+body .dashboard .blockMiddle .ninastatut {
+  width: 200px;
+  height: 200px;
+  background-color: #F5F5F5;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  background-color: #a02222;
+  box-shadow: 0 0 20px 10px #a02222;
+  border: none;
+  transition: 0.5s;
+  transform: rotate(0deg);
+  animation: AnimLogo 3s infinite cubic-bezier(0.51, 0.5, 0.57, 0.59);
+}
+body .dashboard .blockBottom {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* @KeyFrame */
+@keyframes menu_anim {
+  0% {
+    border-bottom: none;
+  }
+  20% {
+    border-bottom: solid 3px #E2D784;
+  }
+  40% {
+    border-bottom: solid 3px #E2D784;
+    border-right: solid 3px #E2D784;
+  }
+  60% {
+    border-bottom: solid 3px #E2D784;
+    border-right: solid 3px #E2D784;
+    border-top: solid 3px #E2D784;
+  }
+  100% {
+    border-bottom: solid 3px #E2D784;
+    border-right: solid 3px #E2D784;
+    border-top: solid 3px #E2D784;
+    border-left: solid 3px #E2D784;
+  }
+}
+@keyframes AnimLogo {
+  0% {
+    box-shadow: 0 0 20px 10px #a02222;
+  }
+  50% {
+    box-shadow: 0 0 20px 110px #a02222;
+  }
+  100% {
+    box-shadow: 0 0 20px 10px #a02222;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
