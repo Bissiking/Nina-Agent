@@ -65,7 +65,7 @@ app.get("/api/disk-use", function(req, res) {
     var drive = osu.drive
     drive.info()
         .then(info => {
-            console.log(info.usedPercentage)
+            res.json(info.usedPercentage);
         })
 });
 
