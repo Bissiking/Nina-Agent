@@ -16,9 +16,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, './website/index.html'));
-});
+
 // IMAGES
 app.get('/api/images/Nina', (req, res, next) => {
     const imageSend = logo + 'Nina/Nina.png';
@@ -38,6 +36,12 @@ app.get('/api/images/Nina150', (req, res, next) => {
 app.get('/api/css/Nina', (req, res, next) => {
     const imageSend = '/public/stylesheets/style.css';
     res.sendFile(__dirname + imageSend);
+});
+
+// JS Website
+app.get('/api/js/Nina', (req, res, next) => {
+    const JsSend = '/public/javascripts/index.js';
+    res.sendFile(__dirname + JsSend);
 });
 
 

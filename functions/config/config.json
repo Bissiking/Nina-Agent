@@ -3,7 +3,7 @@
         "mode": "default",
         "name": "stivi",
         "version": "0.1.0",
-        "build": "N35",
+        "build": "N60",
         "port": {
             "api": "6200",
             "http": "6201"
