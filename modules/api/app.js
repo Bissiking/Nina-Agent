@@ -2,7 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const path = require('path');
-// Docker
+var osu = require('node-os-utils')
+    // Docker
 var Docker = require('dockerode');
 var docker = new Docker({ socketPath: '/var/run/docker.sock' });
 // Variables
