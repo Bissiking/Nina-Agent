@@ -7,7 +7,7 @@ var urlAPIBis = "annabelle.mhemery.com";
 function cpuUse(system) {
     $.ajax({
         type: "GET",
-        url: "http://" + urlAPI + ":6100/api/" + system + "-use",
+        url: "http://" + urlAPI + ":6200/api/" + system + "-use",
         cache: false,
         success: function(data) {
             let cpuNoVirg = Math.trunc(data);
@@ -23,7 +23,7 @@ function cpuUse(system) {
 function ramUse(system) {
     $.ajax({
         type: "GET",
-        url: "http://" + urlAPI + ":6100/api/" + system + "-use",
+        url: "http://" + urlAPI + ":6200/api/" + system + "-use",
         cache: false,
         success: function(data) {
             let ramNoVirg = Math.trunc(data);
@@ -39,7 +39,7 @@ function ramUse(system) {
 function diskUse(system) {
     $.ajax({
         type: "GET",
-        url: "http://" + urlAPI + ":6100/api/" + system + "-use",
+        url: "http://" + urlAPI + ":6200/api/" + system + "-use",
         cache: false,
         success: function(data) {
             animatedArc(system, lastdisk, data);
