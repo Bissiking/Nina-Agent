@@ -44,6 +44,30 @@ app.get('/api/js/Nina', (req, res, next) => {
     res.sendFile(__dirname + JsSend);
 });
 
+// System USE
+app.get("/api/cpu-use", function(req, res) {
+    var cpu = osu.cpu
+    cpu.usage().then(info => {
+        res.json(info);
+    })
+});
+
+app.get("/api/ram-use", function(req, res) {
+    var mem = osu.mem
+    mem.info()
+        .then(info => {
+            res.json(info.usedMemPercentage);
+        })
+});
+
+app.get("/api/disk-use", function(req, res) {
+    var drive = osu.drive
+    drive.info()
+        .then(info => {
+            console.log(info.usedPercentage)
+        })
+});
+
 
 // CONTAINERS
 app.post('/containers', (req, res, next) => {
