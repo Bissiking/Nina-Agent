@@ -4,10 +4,11 @@ const app = express();
 const http = require('http');
 const path = require('path');
 const server = http.createServer(app);
+const si = require('systeminformation');
 // Recupe config Agent
 const AgentConfig = require('../../functions/config/index');
 AgentConfig();
-AgentPort = data.port.http;
+AgentPort = dataConf.port.http;
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
@@ -21,7 +22,25 @@ const axios = require("axios");
 
 // ROUTE
 app.get('/', function(req, res) {
-    res.render('pages/index', { title:"title" });
+    let cpuinfo = require('../../data/system_cpu.json')
+    let systeminfo = require('../../data/system_materiel.json')
+    let osinfo = require('../../data/system_os.json')
+    var options = {
+        title: "Dashboard",
+        cpuSpeedMax: cpuinfo.cpuSpeedMax,
+        cpuCores: cpuinfo.cpuCores,
+        cpuModele: cpuinfo.cpuModel,
+        manufacturer: systeminfo.manufacturer,
+        model: systeminfo.model,
+        platform: osinfo.platform,
+        distro: osinfo.distro
+    }
+    res.render('pages/index', options);
+});
+
+// CONFIG
+app.get('/configuration', function(req, res) {
+    res.render('pages/index', { title: "title" });
 });
 
 // Start server WEB

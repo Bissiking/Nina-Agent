@@ -45,6 +45,17 @@ app.get('/api/js/Nina', (req, res, next) => {
     res.sendFile(__dirname + JsSend);
 });
 
+app.get('/api/js/justgauge', (req, res, next) => {
+    const JsSend = '/public/javascripts/justgage.js';
+    res.sendFile(__dirname + JsSend);
+});
+
+app.get('/api/js/justgauge-min', (req, res, next) => {
+    const JsSend = '/public/javascripts/raphael-2.1.4.min.js';
+    res.sendFile(__dirname + JsSend);
+});
+
+
 // System USE
 app.get("/api/cpu-use", function(req, res) {
     var cpu = osu.cpu
@@ -57,7 +68,7 @@ app.get("/api/ram-use", function(req, res) {
     var mem = osu.mem
     mem.info()
         .then(info => {
-            res.json(info.usedMemPercentage);
+            res.json(info);
         })
 });
 
@@ -65,9 +76,22 @@ app.get("/api/disk-use", function(req, res) {
     var drive = osu.drive
     drive.info()
         .then(info => {
-            res.json(info.usedPercentage);
+            res.json(info);
         })
 });
+
+app.get("/api/net-use", function(req, res) {
+    var netstat = osu.netstat
+
+    netstat.inOut()
+        .then(info => {
+            console.log(info)
+        })
+});
+
+
+
+
 
 
 // CONTAINERS

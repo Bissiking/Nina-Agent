@@ -11,7 +11,14 @@ console.log("Chargement des modules de l'Agent");
 const AgentConfig = require('./functions/config/index');
 AgentConfig();
 
-// console.log("Nina initialisé. || Version:" + data.version + " || Build:" + data.build);
+// SYSTEM
+const { OsInfo, CpuInfo, SystemInfo } = require('./modules/website/system_setup');
+console.log('Récupération des informations machine');
+OsInfo()
+CpuInfo()
+SystemInfo()
+
+// console.log("Nina initialisé. || Version:" + dataConf.version + " || Build:" + dataConf.build);
 
 // FORK Module
 const ForkInit = require('./functions/fork/index');
@@ -20,4 +27,4 @@ const ForkInit = require('./functions/fork/index');
 // Execute FORK Modules
 
 ForkInit('api');
-ForkInit('http');
+ForkInit('website');

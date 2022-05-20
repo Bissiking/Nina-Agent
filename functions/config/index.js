@@ -12,7 +12,7 @@ function AgentConfig(apps) {
         }
     })
     let foundObjects = searcher.query(AgentMode);
-    return data = foundObjects[0];
+    return dataConf = foundObjects[0];
 }
 
 module.exports = AgentConfig;

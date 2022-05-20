@@ -5,7 +5,7 @@ const app = require('./app');
 // Recupe config Agent
 const AgentConfig = require('../../functions/config/index');
 AgentConfig();
-AgentPort = data.port.api;
+AgentPort = dataConf.port.api;
 
 const normalizePort = val => {
     const port = parseInt(val, 10);

@@ -1,0 +1,8 @@
+{
+    "name": "agent01",
+    "urlApiExterne": "",
+    "port": {
+        "api": "6200",
+        "http": "6201"
+    }
+}

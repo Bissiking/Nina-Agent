@@ -1,9 +1,8 @@
 {
     "agent": [{
         "mode": "default",
-        "name": "stivi",
-        "version": "0.1.0",
-        "build": "N60",
+        "version": "0.1.2",
+        "build": "N71",
         "port": {
             "api": "6200",
             "http": "6201"
