@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<%- include('../partials/head'); %>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <body>
+        <header><img src="http://annabelle.mhemery.com:6100/api/images/Nina"></header>
+        <main class="content-block">
+            <nav>
+                <ul>
+                    <li>Dashboard</li>
+                    <li>Nina Modules</li>
+                    <li>Agent Nina</li>
+                </ul>
+            </nav>
+            <div class="system_block">
+                <div class="system_block_generique system_cpu">
+                    <h3>CPU</h3>
+                    <canvas id="cpu" width="200px" height="130px"></canvas>
+                </div>
+                <div class="system_block_generique system_ram">
+                    <h3>RAM</h3>
+                    <canvas id="ram" width="200px" height="130px"></canvas>
+                </div>
+                <div class="system_block_generique system_disk">
+                    <h3>DISK</h3>
+                    <canvas id="disk" width="200px" height="130px"></canvas>
+                </div>
+            </div>
+        </main>
+        <script src="http://192.168.1.202:6100/api/js/Nina"></script>
+    </body>
+
+</html>
