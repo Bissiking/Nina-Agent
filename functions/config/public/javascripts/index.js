@@ -1,7 +1,7 @@
 $("img.start").click(function(e) {
     $('h3').html('Validation et confirmation de Nina');
     var urlcourante = document.location.href;
-    var urlNina = "http://192.168.1.202:6102/update"
+    var urlNina = "http://192.168.1.202:6102/new_agent"
     $.ajax({
         type: "POST",
         url: urlNina,
