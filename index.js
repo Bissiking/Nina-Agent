@@ -1,48 +1,30 @@
-const http = require('http');
-const app = require('./app');
-const NinaAPI = process.env.PORT_API
+const path = './functions/config/config.json';
+const { fork } = require("child_process");
 
-const normalizePort = val => {
-    const port = parseInt(val, 10);
-
-    if (isNaN(port)) {
-        return val;
+if (fs.existsSync(path)) {
+    console.log('ok');
+    const AgentConfig = require(path);
+    const data = AgentConfig.agent;
+    // // FORK Module
+    const ForkInit = require('./modules/fork/NEWindex');
+    ForkInit(data); // HTTP MODULE
+} else {
+    console.log('Fichier de config non trouvé');
+    // Création de la variable child
+    if (fs.existsSync(path)) {
+        child.on("close", function(code) {
+            console.log("Alerte - Module arrêté. Redémarrage manuel nécéssaire || Code: " + code);
+        });
     }
-    if (port >= 0) {
-        return port;
-    }
-    return false;
-};
-const port = normalizePort(NinaAPI ||  '6100');
-app.set('port', port);
 
-const errorHandler = error => {
-    if (error.syscall !== 'listen') {
-        throw error;
-    }
-    const address = server.address();
-    const bind = typeof address === 'string' ? 'pipe ' + address : 'port: ' + port;
-    switch (error.code) {
-        case 'EACCES':
-            console.error(bind + ' requires elevated privileges.');
-            process.exit(1);
-            break;
-        case 'EADDRINUSE':
-            console.error(bind + ' is already in use.');
-            process.exit(1);
-            break;
-        default:
-            throw error;
-    }
-};
 
-const server = http.createServer(app);
 
-server.on('error', errorHandler);
-server.on('listening', () => {
-    const address = server.address();
-    const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + port;
-    console.log('API:' + bind);
-});
 
-server.listen(port);
+    // // FORK Module
+    // const ForkInit = require('./functions/fork/index');
+
+    // // ------------------------------------------------------ //
+    // // Execute FORK Modules
+
+    // ForkInit('http'); // DISCORD MODULE
+}

@@ -1,14 +1,11 @@
 {
-    "name": "nina",
-    "version": "0.0.1 - N6",
-    "description": "Nina ...",
+    "name": "agent",
+    "version": "0.2.0 - A1",
+    "description": "Agent de Nina",
     "dependencies": {
-        "dockerode": "^3.3.1",
-        "dotenv": "^16.0.0",
+        "axios": "^0.27.2",
+        "ejs": "^3.1.5",
         "express": "^4.17.3",
-        "http": "^0.0.1-security",
-        "node-docker-api": "^1.1.22",
-        "nodemon": "^2.0.15",
-        "socket.io": "^4.5.0"
+        "http": "^0.0.1-security"
     }
 }
