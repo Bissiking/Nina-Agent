@@ -1,7 +1,13 @@
+@font-face {
+    font-family: NOSOs;
+    src: url(../fonts/NOSOs.ttf);
+}
+
 // Font du site
 $font_logo: 'DM Serif Text',
 serif;
-$font_primary: 'Open Sans',
+$font_primary: 'NOSOs';
+$font_secondary: 'Open Sans',
 sans-serif;
 // Arrière plan du site + Texte
 $Background_Color: #30475E;
