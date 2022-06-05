@@ -1,24 +1,56 @@
-const path = './functions/config/config.json';
-const { fork } = require("child_process");
-const fs = require("fs");
+const { fork, exec } = require("child_process");
+const fs = require('fs');
+const { Module } = require("module");
+const pathCore = './agent-core/';
+const pathFork = './modules/agent-fork/';
+const pathWebsite = './modules/agent-website/';
 
-if (fs.existsSync(path)) {
-    // Vérification de la présence du module fork
-    console.log('Vérification de la présence du module fork');
-    let pathFork = './modules/agent-fork';
-    if (fs.existsSync(pathFork)) {
-        console.log('stepOK');
+function AgentStart() {
+    if (fs.existsSync(pathCore)) { // Check du core
+        const { CloneFork, CloneWebsite } = require("./agent-core/clone.js");
+        if (fs.existsSync(pathFork)) {
+            console.log('Fork déjà existant');
+        } else {
+            CloneFork();
+        }
+        if (fs.existsSync(pathWebsite)) {
+            console.log('Website déjà existant');
+        } else {
+            CloneWebsite();
+        }
+        console.log('Lancement du coeur de l\'agent');
+        setTimeout(() => {
+            const modules = require(pathFork + 'module.json') // Récupération du fichier module
+            const { Fork } = require(pathFork + "index.js");
+            let ModuleCount = Object.keys(modules).length
+            for (let i = 0; i < ModuleCount; i++) {
+                let Module = Object.keys(modules)[i];
+                Fork(Module);
+            }
+        }, 5000);
     } else {
-        const gitPullOrClone = require('git-pull-or-clone');
-        console.log('Téléchargement et installation du module Fork');
-        gitPullOrClone('https://github.com/BissiGIT/agent-fork.git', './modules', (err) => {
-            console.log(err);
+        // Téléchargement du module
+        exec('git clone https://github.com/BissiGIT/agent-core.git', (error, stdout, stderr) => {
+            if (error) {
+                console.error(`exec error: ${error}`);
+                return;
+            }
+            // Téléchargment des modules
+            const { CloneFork, CloneWebsite } = require("./agent-core/clone.js");
+            if (fs.existsSync(pathFork)) {
+                console.log('Fork déjà existant');
+            } else {
+                CloneFork();
+            }
+            if (fs.existsSync(pathWebsite)) {
+                console.log('Website déjà existant');
+            } else {
+                CloneWebsite();
+            }
         });
+        AgentStart();
     }
-} else {
-    console.log('Fichier de config non trouvé');
-    const child = fork('./functions/config/index'); // HTTP MODULE
-    child.on("close", function(code) {
-        console.log("Alerte - Module arrêté. Redémarrage manuel nécéssaire || Code: " + code);
-    });
 }
+
+// Lancement du coeur
+AgentStart();
