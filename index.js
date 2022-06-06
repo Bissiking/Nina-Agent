@@ -29,7 +29,7 @@ function AgentStart() {
         }, 5000);
     } else {
         // Téléchargement du module
-        exec('git clone https://github.com/BissiGIT/agent-core.git', (error, stdout, stderr) => {
+        exec('npm i && git clone https://github.com/BissiGIT/agent-core.git', (error, stdout, stderr) => {
             if (error) {
                 console.error(`exec error: ${error}`);
                 return;
