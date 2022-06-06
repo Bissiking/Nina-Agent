@@ -1,6 +1,5 @@
 const { fork, exec } = require("child_process");
 const fs = require('fs');
-const { Module } = require("module");
 const pathCore = './agent-core/';
 const pathFork = './modules/agent-fork/';
 const pathWebsite = './modules/agent-website/';
