@@ -32,10 +32,6 @@ app.post("/register", (req, res) => {
     let configJSON = req.body
     const fs = require('fs');
     let data = JSON.stringify(configJSON);
-    // fs.writeFile('./config/config.json', data);
-    fs.copyFile('./functions/config/sample_config.json', './functions/config/config.json', function(err) {
-        if (err) console.log('ERROR: ' + err);
-    });
     setTimeout(() => {
         fs.writeFile("./functions/config/config.json", data, 'utf8', function(err) {
             if (err) {
