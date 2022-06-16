@@ -1,54 +1,24 @@
-const { fork, exec } = require("child_process");
+const { exec } = require("child_process");
+const { Fork } = require("./core/fork/index");
 const fs = require('fs');
-const pathCore = './agent-core/';
-const pathFork = './modules/agent-fork/';
-const pathWebsite = './modules/agent-website/';
 
 function AgentStart() {
-    if (fs.existsSync(pathCore)) { // Check du core
-        const { CloneFork, CloneWebsite } = require("./agent-core/clone.js");
-        if (fs.existsSync(pathFork)) {
-            console.log('Fork déjà existant');
+    exec('npm i', (error, stdout, stderr) => {
+        if (error) {
+            console.error('Echec du lancement de la commande');
+            console.error(`exec error: ${error}`);
+            return;
         } else {
-            CloneFork();
-        }
-        if (fs.existsSync(pathWebsite)) {
-            console.log('Website déjà existant');
-        } else {
-            CloneWebsite();
-        }
-        console.log('Lancement du coeur de l\'agent');
-        setTimeout(() => {
-            const modules = require(pathFork + 'module.json') // Récupération du fichier module
-            const { Fork } = require(pathFork + "index.js");
-            let ModuleCount = Object.keys(modules).length
-            for (let i = 0; i < ModuleCount; i++) {
-                let Module = Object.keys(modules)[i];
-                Fork(Module);
-            }
-        }, 5000);
-    } else {
-        // Téléchargement du module
-        exec('npm i && git clone https://github.com/BissiGIT/agent-core.git', (error, stdout, stderr) => {
-            if (error) {
-                console.error(`exec error: ${error}`);
-                return;
-            }
-            // Téléchargment des modules
-            const { CloneFork, CloneWebsite } = require("./agent-core/clone.js");
-            if (fs.existsSync(pathFork)) {
-                console.log('Fork déjà existant');
+            // Using fs.exists() method
+            if (fs.existsSync('./data/data.conf')) {
+                console.log(exists ? 'Found' : 'Not Found!');
             } else {
-                CloneFork();
-            }
-            if (fs.existsSync(pathWebsite)) {
-                console.log('Website déjà existant');
-            } else {
-                CloneWebsite();
-            }
-        });
-        AgentStart();
-    }
+                setTimeout(() => {
+                    Fork('api');
+                }, 5000);
+            };
+        }
+    });
 }
 
 // Lancement du coeur
