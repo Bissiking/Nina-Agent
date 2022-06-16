@@ -2,6 +2,5 @@ node_modules/
 modules/agent-*
 test/
 data/fork_data/*.json
+data/agent_data/*.json
 data/logs/*.json
-agent-core/
-functions/config/config.json
