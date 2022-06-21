@@ -46,13 +46,26 @@ const errorHandler = error => {
     }
 };
 
-const server = http.createServer(app, credentials);
+const server = http.createServer(app);
+const serverhttps = http.createServer(credentials, app);
 
+
+// SERVEUR HTTP
 server.on('error', errorHandler);
 server.on('listening', () => {
     const address = server.address();
     const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + port;
     console.log('API:' + bind);
 });
-
 server.listen(port);
+
+// SERVEUR HTTPS
+var porthttps = '8443';
+serverhttps.on('error', errorHandler);
+serverhttps.on('listening', () => {
+    const address = serverhttps.address();
+    const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + porthttps;
+    console.log('API:' + bind);
+});
+
+serverhttps.listen(porthttps);
