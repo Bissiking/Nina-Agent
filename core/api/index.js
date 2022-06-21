@@ -1,5 +1,7 @@
 const http = require('http');
 const app = require('./app');
+const fs = require('fs');
+
 
 var privateKey = fs.readFileSync('./core/https/certs/AgentCerts.key');
 var certificate = fs.readFileSync('./core/https/certs/AgentCerts.crt');
