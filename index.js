@@ -17,10 +17,10 @@ function AgentStart() {
                         const Agent = './data/agent_data/agent.json';
                         console.log('Création des certificats HTTPS');
                         CreateCerts(Agent);
+                        setTimeout(() => {
+                            Fork('api');
+                        }, 10000);
                     }
-                }, 5000);
-                setTimeout(() => {
-                    Fork('api');
                 }, 5000);
             } else {
                 CreateDocsCerts();
