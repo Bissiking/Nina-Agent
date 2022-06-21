@@ -1,6 +1,6 @@
 const { exec } = require("child_process");
 const { Fork } = require("./core/fork/index");
-const { CreateDocsData, CreateDocsCerts } = require("./core/https/index");
+const { CreateDocsData, CreateDocsCerts, CreateCerts } = require("./core/https/index");
 const fs = require('fs');
 
 function AgentStart() {
