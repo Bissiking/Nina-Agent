@@ -33,7 +33,7 @@ function CreateCerts(Agent) {
             console.log(`stdout: ${stdout}`);
             console.error(`stderr: ${stderr}`);
             setTimeout(() => {
-                exec('openssl req -nodes -new -passout pass:' + Agent.id_agent + ' -subj "/C=FR/ST=Paris/L=Paris/O=NinaIndustries/OU=Nina/CN="' + Agent.ip_agent + ' -x509 -keyout ./core/https/certs/AgentCerts.key -out ./core/https/certs/AgentCerts.cert', (error, stdout, stderr) => {
+                exec('openssl req -nodes -new -passout pass:' + Agent.id_agent + ' -subj "/C=FR/ST=Paris/L=Paris/O=NinaIndustries/OU=Nina/CN="' + Agent.ip_agent + ' -x509 -keyout ./core/https/certs/AgentCerts.key -out ./core/https/certs/AgentCerts.crt', (error, stdout, stderr) => {
                     if (error) {
                         console.error(`exec error: ${error}`);
                         return;

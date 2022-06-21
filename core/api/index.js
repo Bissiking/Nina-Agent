@@ -1,6 +1,10 @@
 const http = require('http');
 const app = require('./app');
 
+var privateKey = fs.readFileSync('./core/https/certs/AgentCerts.key');
+var certificate = fs.readFileSync('./core/https/certs/AgentCerts.crt');
+var credentials = { key: privateKey, cert: certificate };
+
 // Recupe config Agent
 // Recupe config Agent
 const AgentConfig = require('./config.json');
@@ -40,7 +44,7 @@ const errorHandler = error => {
     }
 };
 
-const server = http.createServer(app);
+const server = http.createServer(app, credentials);
 
 server.on('error', errorHandler);
 server.on('listening', () => {
