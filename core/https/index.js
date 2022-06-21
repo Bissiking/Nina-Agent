@@ -3,6 +3,7 @@ var dirData = './data';
 var dirCerts = './core/https/certs';
 // CONST
 const fs = require('fs');
+const { exec } = require("child_process");
 // Function
 function CreateDocsCerts() {
     if (!fs.existsSync(dirCerts)) {
