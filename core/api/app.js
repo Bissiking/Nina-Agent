@@ -19,7 +19,6 @@ function CloneAPI(res) {
     });
 }
 
-// FUNCTIONS
 function UPDATE(res) {
     exec('git pull', (error, stdout, stderr) => {
         if (error) {

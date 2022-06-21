@@ -1,5 +1,6 @@
 const { exec } = require("child_process");
 const { Fork } = require("./core/fork/index");
+const { CreateDocsData, CreateDocsCerts } = require("./core/https/index");
 const fs = require('fs');
 
 function AgentStart() {
@@ -9,13 +10,24 @@ function AgentStart() {
             console.error(`exec error: ${error}`);
             return;
         } else {
-            // Using fs.exists() method
-            if (fs.existsSync('./data/data.conf')) {
-                console.log(exists ? 'Found' : 'Not Found!');
-            } else {
+            CreateDocsData();
+            if (fs.existsSync('./core/https/certs')) {
+                setTimeout(() => {
+                    if (!fs.existsSync('./data/agent_data/agent.json')) {
+                        const Agent = './data/agent_data/agent.json';
+                        CreateCerts(Agent);
+                    }
+                }, 3600000);
                 setTimeout(() => {
                     Fork('api');
                 }, 5000);
+            } else {
+                CreateDocsCerts();
+                console.log('Création des certificats HTTPS');
+                setTimeout(() => {
+                    AgentStart();
+                }, 30000);
+
             };
         }
     });
