@@ -15,15 +15,15 @@ function AgentStart() {
                 setTimeout(() => {
                     if (!fs.existsSync('./data/agent_data/agent.json')) {
                         const Agent = './data/agent_data/agent.json';
+                        console.log('Création des certificats HTTPS');
                         CreateCerts(Agent);
                     }
-                }, 3600000);
+                }, 5000);
                 setTimeout(() => {
                     Fork('api');
                 }, 5000);
             } else {
                 CreateDocsCerts();
-                console.log('Création des certificats HTTPS');
                 setTimeout(() => {
                     AgentStart();
                 }, 30000);
