@@ -1,4 +1,5 @@
 const http = require('http');
+var https = require('https');
 const app = require('./app');
 const fs = require('fs');
 
@@ -47,7 +48,7 @@ const errorHandler = error => {
 };
 
 const server = http.createServer(app);
-const serverhttps = http.createServer(credentials, app);
+const serverhttps = https.createServer(credentials, app);
 
 
 // SERVEUR HTTP
