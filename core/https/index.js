@@ -1,7 +1,8 @@
 // VARIABLES 
 var dirData = './data';
 var dirCerts = './core/https/certs';
-
+// CONST
+const fs = require('fs');
 // Function
 function CreateDocsCerts() {
     if (!fs.existsSync(dirCerts)) {
