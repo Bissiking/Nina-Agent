@@ -25,7 +25,7 @@ function CreateDocsData() {
 
 function CreateCerts(Agent) {
     if (fs.existsSync(dirCerts)) {
-        exec('apt install openssl', (error, stdout, stderr) => {
+        exec('apt install letsencrypt', (error, stdout, stderr) => {
             if (error) {
                 console.error(`exec error: ${error}`);
                 return;
@@ -33,11 +33,31 @@ function CreateCerts(Agent) {
             console.log(`stdout: ${stdout}`);
             console.error(`stderr: ${stderr}`);
             setTimeout(() => {
-                exec('openssl req -nodes -new -passout pass:' + Agent.id_agent + ' -subj "/C=FR/ST=Paris/L=Paris/O=NinaIndustries/OU=Nina/CN="' + Agent.ip_agent + ' -x509 -keyout ./core/https/certs/AgentCerts.key -out ./core/https/certs/AgentCerts.crt', (error, stdout, stderr) => {
+                exec('certbot certonly --standalone --agree-tos --preferred-challenges http -d ' + Agent.ip_agent + ' --register-unsafely-without-email', (error, stdout, stderr) => {
                     if (error) {
                         console.error(`exec error: ${error}`);
                         return;
                     }
+                    setTimeout(() => {
+                        exec('cp /etc/letsencrypt/live/' + Agent.ip_agent + '/cert.pem ./core/https/certs/custom.crt' + Agent.ip_agent + ' --register-unsafely-without-email', (error, stdout, stderr) => {
+                            if (error) {
+                                console.error(`exec error: ${error}`);
+                                return;
+                            }
+                            console.log(`stdout: ${stdout}`);
+                            console.error(`stderr: ${stderr}`);
+                            setTimeout(() => {
+                                exec('cp /etc/letsencrypt/live/' + Agent.ip_agent + '/cert.pem ./core/https/certs/custom.key' + Agent.ip_agent + ' --register-unsafely-without-email', (error, stdout, stderr) => {
+                                    if (error) {
+                                        console.error(`exec error: ${error}`);
+                                        return;
+                                    }
+                                    console.log(`stdout: ${stdout}`);
+                                    console.error(`stderr: ${stderr}`);
+                                });
+                            }, 1000);
+                        });
+                    }, 1000);
                     console.log(`stdout: ${stdout}`);
                     console.error(`stderr: ${stderr}`);
                 });
@@ -48,7 +68,6 @@ function CreateCerts(Agent) {
         CreateCerts();
     }
 }
-
 
 // FUNCTION
 module.exports = {

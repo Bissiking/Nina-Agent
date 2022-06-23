@@ -4,8 +4,8 @@ const app = require('./app');
 const fs = require('fs');
 
 
-var privateKey = fs.readFileSync('./core/https/certs/AgentCerts.key');
-var certificate = fs.readFileSync('./core/https/certs/AgentCerts.crt');
+var privateKey = fs.readFileSync('./core/https/certs/custom.key');
+var certificate = fs.readFileSync('./core/https/certs/custom.crt');
 var credentials = { key: privateKey, cert: certificate };
 
 // Recupe config Agent
