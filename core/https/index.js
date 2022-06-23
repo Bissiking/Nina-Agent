@@ -25,7 +25,7 @@ function CreateDocsData() {
 
 function CreateCerts(Agent) {
     if (fs.existsSync(dirCerts)) {
-        exec('apt install letsencrypt', (error, stdout, stderr) => {
+        exec('apt install certbot', (error, stdout, stderr) => {
             if (error) {
                 console.error(`exec error: ${error}`);
                 return;
