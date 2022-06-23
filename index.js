@@ -19,7 +19,7 @@ function AgentStart() {
                         CreateCerts(Agent);
                         setTimeout(() => {
                             Fork('api');
-                        }, 10000);
+                        }, 60000);
                     }
                 }, 5000);
             } else {
