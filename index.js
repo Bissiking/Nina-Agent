@@ -1,37 +1,47 @@
 const { exec } = require("child_process");
-const { Fork } = require("./core/fork/index");
-const { CreateDocsData, CreateDocsCerts, CreateCerts } = require("./core/https/index");
+const { ForkAll, ForkCore } = require("./core/fork/index");
+const { Logs } = require("./core/logs/index");
+const Mod = 'Noyau';
 const fs = require('fs');
 
 function AgentStart() {
     exec('npm i', (error, stdout, stderr) => {
         if (error) {
-            console.error('Echec du lancement de la commande');
-            console.error(`exec error: ${error}`);
+            Logs(Mod, 'fatal', `Echec du lancement de la commande || exec error: ${error}`)
             return;
         } else {
-            CreateDocsData();
-            if (fs.existsSync('./core/https/certs')) {
-                setTimeout(() => {
-                    if (!fs.existsSync('./data/agent_data/agent.json')) {
-                        const Agent = './data/agent_data/agent.json';
-                        console.log('Création des certificats HTTPS');
-                        CreateCerts(Agent);
-                        setTimeout(() => {
-                            Fork('api');
-                        }, 60000);
+            if (!fs.existsSync('./data/logs')) {
+                fs.mkdirSync('./data/logs');
+                Logs(Mod, 'info', 'Création du dossier "logs"');
+            }
+            const path = require('path');
+            const directory = './data/fork_data';
+            fs.readdir(directory, (err, files) => {
+                if (err) { Logs(Mod, 'fatal', `Dossier introuvable || error: ${err}`) } else {
+                    Logs(Mod, 'info', `Dossier "data/fork_data" trouvé`)
+                };
+                for (const file of files) {
+                    if (file != 'fork_data.txt') {
+                        fs.unlink(path.join(directory, file), err => {
+                            if (err) { Logs(Mod, 'fatal', `Echec de la suppression du dossier || error: ${err}`) } else {
+                                Logs(Mod, 'info', 'Suppression du ficher "fork_data.txt" réussie');
+                            };
+                        });
                     }
-                }, 5000);
-            } else {
-                CreateDocsCerts();
-                setTimeout(() => {
-                    AgentStart();
-                }, 30000);
+                }
+            });
 
-            };
+            ForkCore('api');
+            ForkCore('update');
+            if (!fs.existsSync('./modules')) {
+                fs.mkdirSync('./modules');
+                Logs(Mod, 'info', 'Création du dossier "modules"');
+                ForkAll();
+            } else {
+                ForkAll();
+            }
         }
     });
 }
 
-// Lancement du coeur
 AgentStart();
