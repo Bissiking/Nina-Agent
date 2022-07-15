@@ -55,7 +55,7 @@ server.on('error', errorHandler);
 server.on('listening', () => {
     const address = server.address();
     const bind = typeof address === 'string' ? 'pipe ' + address : port;
-    console.log('API:' + bind);
+    console.log('UPDATE:' + bind);
 });
 server.listen(port);
 
