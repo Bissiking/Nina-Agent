@@ -5,7 +5,7 @@ const Mod = 'Noyau';
 const fs = require('fs');
 
 function AgentStart() {
-    exec('npm i', (error, stdout, stderr) => {
+    exec('rm -Rf node_modules/ && npm i', (error, stdout, stderr) => {
         if (error) {
             Logs(Mod, 'fatal', `Echec du lancement de la commande || exec error: ${error}`)
             return;
