@@ -22,11 +22,8 @@ app.use((req, res, next) => {
 
 // NEW CONFIG
 app.post('/update', function(req, res) {
-    // UPDATE(res);
     let data = req.body
-    console.log(data);
     UPDATE(res, data);
-    // res.send('ok');
 });
 
 
