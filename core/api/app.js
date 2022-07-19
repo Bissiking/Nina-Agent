@@ -79,8 +79,13 @@ app.post('/config', function(req, res) {
             break;
 
         case 'newAgent':
-            let datainfoJSON = JSON.stringify(reqBody.AgentData);
-            let datainfoObject = JSON.parse(datainfoJSON);
+            let AgentData = reqBody.AgentData;
+            let AgentVersion = JSON.parse(fs.readFileSync("./agent.json"));
+
+            let datainfo = { "id_agent": AgentData.id_agent, "name_agent": AgentData.name_agent, "ip_agent": AgentData.ip_agent, "https_agent": AgentData.https_agent, "version_agent": AgentVersion.version, "id_users_agent": AgentData.id_users_agent, "used_agent": AgentData.used_agent, "module_api": AgentData.module_api, "module_website": AgentData.module_website };
+
+            let dataJSONString = JSON.stringify(datainfo);
+            let datainfoObject = JSON.parse(dataJSONString);
             // Converting js object into JSON string
             // and writting to data.json file
             let dataJSON = JSON.stringify(datainfoObject);

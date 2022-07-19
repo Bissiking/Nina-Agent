@@ -4,3 +4,5 @@ test/
 data/*_data/*.json
 data/agent_data/*.json
 data/logs/*.json
+ok_docker
+ok_docker.*

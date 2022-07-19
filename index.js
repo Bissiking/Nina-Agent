@@ -5,11 +5,20 @@ const Mod = 'Noyau';
 const fs = require('fs');
 
 function AgentStart() {
-    exec('rm -Rf node_modules/ && npm i', (error, stdout, stderr) => {
+    // rm -Rf node_modules/ &&
+    exec(' npm i', (error, stdout, stderr) => {
         if (error) {
             Logs(Mod, 'fatal', `Echec du lancement de la commande || exec error: ${error}`)
             return;
         } else {
+            if (!fs.existsSync('./data/fork_data')) {
+                fs.mkdirSync('./data/fork_data');
+                Logs(Mod, 'info', 'Création du dossier "fork_data"');
+            }
+            if (!fs.existsSync('./data/agent_data')) {
+                fs.mkdirSync('./data/agent_data');
+                Logs(Mod, 'info', 'Création du dossier "agent_data"');
+            }
             if (!fs.existsSync('./data/logs')) {
                 fs.mkdirSync('./data/logs');
                 Logs(Mod, 'info', 'Création du dossier "logs"');
@@ -31,8 +40,10 @@ function AgentStart() {
                 }
             });
 
+
             ForkCore('api');
             ForkCore('update');
+            ForkCore('data');
             if (!fs.existsSync('./modules')) {
                 fs.mkdirSync('./modules');
                 Logs(Mod, 'info', 'Création du dossier "modules"');
