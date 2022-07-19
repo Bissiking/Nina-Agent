@@ -3,6 +3,7 @@ const fs = require("fs");
 function LogWriter(logPush) {
     // Vérification de la présence des logs
     if (!fs.existsSync('./data/logs/logs.json')) {
+        fs.mkdirSync('./data/logs');
         let logsDataStart = { "Logs": [] }
         let datainfoJSON = JSON.stringify(logsDataStart);
         let datainfoObject = JSON.parse(datainfoJSON);
