@@ -1,7 +1,0 @@
-{
-    "port": "8080",
-    "version": "0.0.1",
-    "build": "01",
-    "description": "API interne de l'agent",
-    "name": "ApiInterne"
-}

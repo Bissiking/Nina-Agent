@@ -1,11 +1,11 @@
 // CONST
 const { fork } = require("child_process");
 const fs = require("fs");
-
+const { WriteDocs } = require("./SysCore");
 const { Logs } = require("../logs/index");
-const Mod = 'CORE: (FORK)';
+const Mod = 'ForkCore';
 
-// FUNCTION
+// Function
 function WriteChildData(apps, idChild, statut) {
     // Remplissage des informations dans le fichier JSON
     var dataFork = {
@@ -21,7 +21,23 @@ function WriteChildData(apps, idChild, statut) {
     // and writting to data.json file
     const dataJSON = JSON.stringify(forkinfoObject);
     // Ecriture du fichier
+    WriteDocs("./data", "./data/fork_data");
     fs.writeFileSync("./data/fork_data/" + apps + "_child.json", dataJSON);
+}
+
+function ChildOn(child, Mod, apps, idChild) {
+    child.on('spawn', function() {
+        // Indication que le module est allumé dans la console
+        WriteChildData(apps, idChild, 1);
+        Logs(Mod, 'info', 'Lancement du module ": ' + apps + '"');
+    });
+}
+
+function ChildStop(child, Mod, apps, idChild) {
+    child.on("close", function(code) {
+        Logs(Mod, 'info', 'Arrêt du module ": ' + apps + '" || Code: ' + code);
+        WriteChildData(apps, idChild, 0);
+    });
 }
 
 // function ForkReboot(apps, data) {
@@ -49,48 +65,14 @@ function ForkCore(apps) {
     });
 }
 
-function ForkAll() {
-    // LISTING DES MODULES ET LANCEMENT
-    const dir = 'modules/';
-    fs.readdir(dir, (err, files) => {
-        let countDATA = Object.keys(files).length;
-        for (let i = 0; i < countDATA; i++) {
-            const file = files[i];
-            // Création de la variable child
-            const child = fork('modules/' + apps + '/index.js');
-            // UPDATE OR CREATE JSON
-            let idChild = child.pid
-            WriteChildData(apps, idChild, 1);
-            child.on('spawn', function() {
-                // Indication que le module est allumé dans la console
-                Logs(Mod, 'info', 'Lancement du module ": ' + apps + '"');
-            });
-            // En cas de fermeture du NODE ---
-            child.on("close", function(code) {
-                Logs(Mod, 'warn', 'Arrêt du module ": ' + apps + '" || Code: ' + code);
-                WriteChildData(apps, idChild, 0);
-                // ForkReboot(apps);
-            });
-        }
-    });
-}
-
-function ForkManuel(apps) {
+function ForkStart(apps) {
     // Création de la variable child
     const child = fork('modules/' + apps + '/index.js');
     // UPDATE OR CREATE JSON
     let idChild = child.pid
-    WriteChildData(apps, idChild, 1);
-    child.on('spawn', function() {
-        // Indication que le module est allumé dans la console
-        Logs(Mod, 'info', 'Lancement du module ": ' + apps + '"');
-    });
+    ChildOn(child, "info", apps, idChild);
     // En cas de fermeture du NODE ---
-    child.on("close", function(code) {
-        Logs(Mod, 'info', 'Arrêt du module ": ' + apps + '" || Code: ' + code);
-        WriteChildData(apps, idChild, 0);
-        // ForkReboot(apps);
-    });
+    ChildStop(child, "info", apps, idChild);
 }
 
-module.exports = { ForkCore, ForkManuel, ForkAll }
+module.exports = { ForkCore, ForkStart }

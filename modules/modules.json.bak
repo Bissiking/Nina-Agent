@@ -1,0 +1,11 @@
+{
+    "modules":[
+        {
+            "name": "api",
+            "version": "0.0.1",
+            "description": "Cette API est interne à l'agent. Elle permet l'installation et l'utilisation de commande principal. Elle receptionne aussi, toutes les commandes et les renvoies dans leurs modules respectifs",
+            "port": "8080",
+            "ReqUrl": "api"
+        }
+    ]
+}

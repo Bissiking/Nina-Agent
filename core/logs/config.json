@@ -1,6 +1,0 @@
-{
-    "version": "0.0.1",
-    "build": "B01",
-    "description": "Service de logging de l'agent",
-    "name": "logs"
-}

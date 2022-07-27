@@ -6,3 +6,5 @@ data/agent_data/*.json
 data/logs/*.json
 ok_docker
 ok_docker.*
+core/agent-docker-core
+package*.json
