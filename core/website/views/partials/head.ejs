@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Agent Nina</title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="stylesheets/all.min.css">
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<header>
+    <div class="login" style="background-color: rgba(207, 0, 0, 0.808);">
+        <!-- <p>En développement</p> -->
+        <img src="images/Agent150.png">
+        <% if (user == 'Invité') { %>
+            <p><span>Agent non géré par Nina</span></p>
+        <% }else{ %>
+            <p><span>Nom de l'agent:</span><span class="name"><%= user %></span></p>
+        <% } %>
+        <!-- <i class="fa-solid fa-angle-down"></i> -->
+    </div>
+    <img src="images/Agent150.png">
+    <p>Version: <%= AgentVersion %></p>
+    <nav>
+        <ul>
+            <li><a href="#" class="select"><i class="fa-solid fa-gauge"></i> <span>Dashboard</span></a></li>
+            <li><a href="#"><i class="fa-solid fa-wrench"></i> <span>Modules</span></a></li>
+            <li><a href="#"><i class="fa-solid fa-wrench"></i> <span>Paramètres de l'Agent</span></a></li>
+        </ul>
+    </nav>
+</header>
+
+<main id="dashboard" class="main-block">
+    <div class="top-bar">
+        <h4>
+            <%= title %>
+        </h4>
+        <div class="notif-btn-add">
+            <p><i id="btn-notif" class="fa-solid fa-bell"></i><span>0</span></p>
+            <div id="block-notif" class="block-notif-all hidden">
+                <span class="triangle-code"></span>
+                <div class="box-notif">
+                    <h3>Notifications</h3>
+                    <div class="box-notif-all">
+
+                        <div class="notif-box">
+                            <h4>En développement</h4>
+                            <p class="description">Fonctionnalité en cours de développement.</p>
+                        </div>
+
+                    </div>
+                    <h3 class="bar-notif-bottom">Nombres de notifications | 0</h3>
+                </div>
+            </div>
+            <a href="#" style="background-color: grey;"><i class="fa-solid fa-plus"></i> Ajouter un module</a>
+        </div>
+    </div>

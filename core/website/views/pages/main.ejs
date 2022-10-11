@@ -1,0 +1,85 @@
+<%- include('../partials/head'); %>
+ <!-- <p>En développement</p> -->
+
+<% if (user == 'Invité') { %>
+	<div class="list-modules">
+		<h2>Activation de mon agent</h2>
+		<div class="block-module">
+			<a href="#" class="block-generique block-module-ping">
+				<h3>Nina !!</h3>
+				<div class="block-col-gen">
+					<img src="images/www.png">
+					<p class="block-description">Description: <span class="description">Nina pourra vous prévenir si votre agent détecte un problèmes sur vos modules.</span></p>
+					<p>Recommandé</p>
+				</div>
+			</a>
+			<a href="#" class="block-generique block-module-ping">
+				<h3>Gestion solo</h3>
+				<div class="block-col-gen">
+					<img src="images/www.png">
+					<p class="block-description">Description: <span class="description">Vous serez seul sans avoir de retour des problèmes ...</span></p>
+					<p>mmh, idée de merde, mais tu fais ce que tu veux ...</p>
+				</div>
+			</a>
+		</div>        
+	</div>
+	<!-- Liste des modules -->
+	<div class="list-modules-installed">
+		<h2>Renseigne ton token ci-dessous</h2>
+		<div class="tbl-gen tbl-option">
+			<input id="token_agent" type="text" placeholder="Token">
+			<button id="token-Send" data-version="<%= AgentVersion %>">Activer</button>
+		</div>
+	</div>
+<% }else{ %>
+	<!-- Bandeau des modules -->
+	<div class="list-modules">
+		<h2>Liste des modules disponible</h2>
+		<div class="block-module">
+			<a href="#" class="block-generique block-module-ping">
+				<h3>Website</h3>
+				<div class="block-col-gen">
+					<img src="images/www.png">
+					<p class="block-description">Description: <span class="description">Ici, une petite description du module</span></p>
+					<p>Version du module: <span class="version">0.0.0</span></p>
+				</div>
+			</a>
+		</div>
+	</div>
+	<!-- Liste des modules -->
+	<div class="list-modules-installed">
+		<div class="bar-module top-bar-module">
+			<i class="fa-solid fa-plug"></i>
+			<h3>Modules</h3>
+		</div>
+		<div class="bar-module middle-bar-module">
+			<div class="tbl-gen tbl-option">
+				<p class="statut">Statut</p>
+				<p class="name">Nom du module</p>
+				<p class="description">Description</p>
+				<p class="version">Version</p>
+				<p class="action">Actions</p>
+			</div>
+			<div class="tbl-gen tbl-option">
+				<p class="data-statut statut"><i class="fa-solid fa-circle"></i></p>
+				<p class="data-name name">
+					<%= websiteName %>
+				</p>
+				<p class="data-description description">
+					<%= websiteDescription %>
+				</p>
+				<p class="data-version version">
+					<%= websiteVersion %> -
+						<%= websiteBuild %>
+				</p>
+				<p class="data-action action"></p>
+			</div>
+		</div>
+		<div class="bottom-bar-module">
+			<p>Nombre de module allumé: [0]</p>
+		</div>
+	</div>
+<% } %>
+
+
+	<%- include('../partials/foot'); %>

@@ -1,14 +1,38 @@
 {
-    "name": "agent",
-    "version": "0.2.0 - A1",
-    "description": "Agent de Nina",
-    "dependencies": {
-        "axios": "^0.27.2",
-        "ejs": "^3.1.5",
-        "express": "^4.17.3",
-        "http": "^0.0.1-security",
-        "https": "^1.0.0",
-        "mysql": "^2.18.1",
-        "node-os-utils": "^1.3.7"
-    }
+  "name": "nina-api",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "async": "^3.2.3",
+    "axios": "^0.26.1",
+    "body-parser": "^1.20.0",
+    "dockerode": "^3.3.1",
+    "dotenv": "^16.0.0",
+    "ejs": "^3.1.5",
+    "express": "^4.18.1",
+    "http": "^0.0.1-security",
+    "node-docker-api": "^1.1.22",
+    "node-os-utils": "^1.3.7",
+    "nodemon": "^2.0.15",
+    "search-array": "^1.5.0",
+    "socket.io": "^4.5.0",
+    "util": "^0.12.4"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bissiking/nina-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bissiking/nina-api/issues"
+  },
+  "homepage": "https://github.com/Bissiking/nina-api#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
 }

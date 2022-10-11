@@ -1,7 +1,0 @@
-{
-    "port": "8081",
-    "version": "0.0.1",
-    "build": "01",
-    "description": "API permettant la mise à jour de l'agent",
-    "name": "API Update"
-}

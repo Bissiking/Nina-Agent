@@ -5,33 +5,33 @@ const { exec } = require("child_process");
 const fs = require("fs");
 const osu = require('node-os-utils');
 
-const { Logs } = require("../logs/index");
-const Mod = 'CORE: (API)';
+// const { Logs } = require("../logs/index");
+// const Mod = 'CORE: (API)';
 
 // FUNCTIONS
-function CloneAPI(res) {
-    exec('cd modules && git clone https://github.com/BissiGIT/agent-api.git', (error, stdout, stderr) => {
-        if (error) {
-            res.send('ERROR');
-            Logs(Mod, 'fatal', `Echec de l'installation du module "API" || exec error: ${error} || OUT COMMAND: ${stdout} || OUT ERR: ${stderr}`)
-            return;
-        } else {
-            res.send('installed');
-        }
-    });
-}
+// function CloneAPI(res) {
+//     exec('cd modules && git clone https://github.com/BissiGIT/agent-api.git', (error, stdout, stderr) => {
+//         if (error) {
+//             res.send('ERROR');
+//             Logs(Mod, 'fatal', `Echec de l'installation du module "API" || exec error: ${error} || OUT COMMAND: ${stdout} || OUT ERR: ${stderr}`)
+//             return;
+//         } else {
+//             res.send('installed');
+//         }
+//     });
+// }
 
-function UPDATE(res) {
-    exec('git pull', (error, stdout, stderr) => {
-        if (error) {
-            res.send('ERROR');
-            Logs(Mod, 'fatal', `Echec de l'installation de la mise à jour de l'agent || exec error: ${error} || OUT COMMAND: ${stdout} || OUT ERR: ${stderr}`)
-            return;
-        } else {
-            res.send('Mise à jour');
-        }
-    });
-}
+// function UPDATE(res) {
+//     exec('git pull', (error, stdout, stderr) => {
+//         if (error) {
+//             res.send('ERROR');
+//             Logs(Mod, 'fatal', `Echec de l'installation de la mise à jour de l'agent || exec error: ${error} || OUT COMMAND: ${stdout} || OUT ERR: ${stderr}`)
+//             return;
+//         } else {
+//             res.send('Mise à jour');
+//         }
+//     });
+// }
 // ----------------------
 
 app.use(express.json());
@@ -44,23 +44,25 @@ app.use((req, res, next) => {
     next();
 });
 
+// API
+
 app.get('/test', function(req, res) {
     res.send("ok");
 });
 
-app.post('/api-clone', function(req, res) {
-    CloneAPI(res);
-});
+// app.post('/api-clone', function(req, res) {
+//     CloneAPI(res);
+// });
 
 // System USE
-app.get("/system/cpu-use", function(req, res) {
+app.get("/system/cpu", function(req, res) {
     var cpu = osu.cpu
     cpu.usage().then(info => {
         res.json(info);
     })
 });
 
-app.get("/system/ram-use", function(req, res) {
+app.get("/system/ram", function(req, res) {
     var mem = osu.mem
     mem.info()
         .then(info => {
@@ -68,44 +70,21 @@ app.get("/system/ram-use", function(req, res) {
         })
 });
 
-// NEW CONFIG
-app.post('/config', function(req, res) {
-    let reqBody = req.body;
-
-    switch (reqBody.config) {
-        case 'check':
-            Logs(Mod, 'info', 'Demande de vérification de connectivité de la part de Nina');
-            res.send("ok");
-            break;
-
-        case 'newAgent':
-            let AgentData = reqBody.AgentData;
-            let AgentVersion = JSON.parse(fs.readFileSync("./agent.json"));
-
-            let datainfo = { "id_agent": AgentData.id_agent, "name_agent": AgentData.name_agent, "ip_agent": AgentData.ip_agent, "https_agent": AgentData.https_agent, "version_agent": AgentVersion.version, "id_users_agent": AgentData.id_users_agent, "used_agent": AgentData.used_agent, "module_api": AgentData.module_api, "module_website": AgentData.module_website };
-
-            let dataJSONString = JSON.stringify(datainfo);
-            let datainfoObject = JSON.parse(dataJSONString);
-            // Converting js object into JSON string
-            // and writting to data.json file
-            let dataJSON = JSON.stringify(datainfoObject);
-            // Ecriture du fichier
-            fs.writeFileSync("./data/agent_data/agent.json", dataJSON);
-            Logs(Mod, 'info', 'Réception de la configuration de l\'agent et écriture de la configuration');
-            res.send("ADD");
-            break;
-
-        default:
-            Logs(Mod, 'fatal', 'Echec de l\'insription de l\'agent auprès de Nina');
-            res.send("STOP");
-            break;
-    }
+app.get("/system/disk", function(req, res) {
+	if (os.type == "Linux") {
+		var drive  = osu.drive 
+		drive.info().then(info => {
+			// Logs(Mod, 'info', 'Demande de récupération du CPU');
+			res.json(info);
+		});
+	}else{
+		res.json('stop');
+	}
 });
-
 // NEW CONFIG
-app.post('/update', function(req, res) {
-    UPDATE(res);
-});
+// app.post('/update', function(req, res) {
+//     UPDATE(res);
+// });
 
 
 module.exports = app;

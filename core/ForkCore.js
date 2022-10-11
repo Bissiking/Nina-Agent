@@ -2,8 +2,8 @@
 const { fork } = require("child_process");
 const fs = require("fs");
 
-const { Logs } = require("../logs/index");
-const Mod = 'CORE: (FORK)';
+// const { Logs } = require("../logs/index");
+// const Mod = 'CORE: (FORK)';
 
 // FUNCTION
 function WriteChildData(apps, idChild, statut) {
@@ -21,7 +21,7 @@ function WriteChildData(apps, idChild, statut) {
     // and writting to data.json file
     const dataJSON = JSON.stringify(forkinfoObject);
     // Ecriture du fichier
-    fs.writeFileSync("./data/fork_data/" + apps + "_child.json", dataJSON);
+    fs.writeFileSync("./docs/fork_data/" + apps + "_child.json", dataJSON);
 }
 
 // function ForkReboot(apps, data) {
@@ -31,7 +31,7 @@ function WriteChildData(apps, idChild, statut) {
 //     }, 15000);
 // }
 
-function ForkCore(apps) {
+function ForkApiCore(apps) {
     // Création de la variable child
     const child = fork('core/' + apps + '/index.js');
     // UPDATE OR CREATE JSON
@@ -39,11 +39,11 @@ function ForkCore(apps) {
     WriteChildData(apps, idChild, 1);
     child.on('spawn', function() {
         // Indication que le module est allumé dans la console
-        Logs(Mod, 'info', 'Lancement de "Core: ' + apps + '"');
+        // Logs(Mod, 'info', 'Lancement de "Core: ' + apps + '"');
     });
     // En cas de fermeture du NODE ---
     child.on("close", function(code) {
-        Logs(Mod, 'warn', 'Arrêt de "Core: ' + apps + '"');
+        // Logs(Mod, 'warn', 'Arrêt de "Core: ' + apps + '"');
         WriteChildData(apps, idChild, 0);
         // ForkReboot(apps);
     });
@@ -63,11 +63,11 @@ function ForkAll() {
             WriteChildData(apps, idChild, 1);
             child.on('spawn', function() {
                 // Indication que le module est allumé dans la console
-                Logs(Mod, 'info', 'Lancement du module ": ' + apps + '"');
+                // Logs(Mod, 'info', 'Lancement du module ": ' + apps + '"');
             });
             // En cas de fermeture du NODE ---
             child.on("close", function(code) {
-                Logs(Mod, 'warn', 'Arrêt du module ": ' + apps + '" || Code: ' + code);
+                // Logs(Mod, 'warn', 'Arrêt du module ": ' + apps + '" || Code: ' + code);
                 WriteChildData(apps, idChild, 0);
                 // ForkReboot(apps);
             });
@@ -83,14 +83,14 @@ function ForkManuel(apps) {
     WriteChildData(apps, idChild, 1);
     child.on('spawn', function() {
         // Indication que le module est allumé dans la console
-        Logs(Mod, 'info', 'Lancement du module ": ' + apps + '"');
+        // Logs(Mod, 'info', 'Lancement du module ": ' + apps + '"');
     });
     // En cas de fermeture du NODE ---
     child.on("close", function(code) {
-        Logs(Mod, 'info', 'Arrêt du module ": ' + apps + '" || Code: ' + code);
+        // Logs(Mod, 'info', 'Arrêt du module ": ' + apps + '" || Code: ' + code);
         WriteChildData(apps, idChild, 0);
         // ForkReboot(apps);
     });
 }
 
-module.exports = { ForkCore, ForkManuel, ForkAll }
+module.exports = { ForkApiCore, ForkManuel, ForkAll }
