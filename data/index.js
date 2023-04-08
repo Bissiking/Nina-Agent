@@ -9,7 +9,7 @@ function WriteConnCheck(val) {
 }
 
 function ConnexionCheck() {
-	axios.get('http://localhost:3001/test')
+	axios.get('https://dev.nina.mhemery.fr/')
 	.then(function(data) {
         if (data.data == "ok") {
             WriteConnCheck(true);

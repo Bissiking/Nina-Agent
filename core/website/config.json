@@ -1,7 +1,0 @@
-{
-    "port": "8081",
-    "version": "2.0.0",
-    "build": "NaN",
-    "description": "Interface web dédié à la configuration de l'agent",
-    "name": "Website"
-}
